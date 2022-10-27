@@ -3,5 +3,6 @@ public class Main {
         //HAHAHA JAG LA TILL DET HÄR
         System.out.println("Hello world!");
         //YEAH YEAH WOW WOW
+        //Här skriver jag i branchA
     }
 }
