@@ -6,5 +6,6 @@ public class Main {
         //KOLLA VAD JAG KAN SKRIVA!
         //Skrivet från master
         //Här skriver jag i branchA
+        //Här skriver jag i branchB
     }
 }
