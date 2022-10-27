@@ -2,6 +2,8 @@ package Övningsuppgift4;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,6 +25,7 @@ public class övningsuppgift4 extends JFrame {
             JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
     public övningsuppgift4(){
+
         setTitle("Coola fil läsaren");
         textArea.setFont(new Font("FontName", Font.ROMAN_BASELINE, 15));
         panel.setLayout(new GridLayout(1,6));
@@ -32,15 +35,28 @@ public class övningsuppgift4 extends JFrame {
         panel.add(save);
         panel.add(print);
         panel.add(end);
-        save.addActionListener(l->{saveFile(textField.getText());});
-        open.addActionListener(l->{readFile(textField.getText());});
-        print.addActionListener(l->{
-            try {
-                textArea.print();
-            } catch (PrinterException e) {
-                throw new RuntimeException(e);
+        save.addActionListener(new ActionListener() { //Anonym class
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveFile(textField.getText());
             }
         });
+        open.addActionListener(l->{readFile(textField.getText());}); //Lambda
+        class myPrintClass implements ActionListener{ //Local class
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    textArea.print();
+                } catch (PrinterException c) {
+                    c.printStackTrace();
+                    throw new RuntimeException(c);
+                }
+            }
+        }
+        myPrintClass printClass = new myPrintClass();
+        print.addActionListener(printClass);
+
         end.addActionListener(l->{System.exit(0);});
 
         add(panel,  BorderLayout.NORTH);
@@ -55,9 +71,6 @@ public class övningsuppgift4 extends JFrame {
         try {
             FileReader r = new FileReader(fileName);{
             textArea.read(r, null);}
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
