@@ -4,5 +4,6 @@ public class Main {
         System.out.println("Hello world!");
         //YEAH YEAH WOW WOW
         //KOLLA VAD JAG KAN SKRIVA!
+        //Skrivet från master
     }
 }
